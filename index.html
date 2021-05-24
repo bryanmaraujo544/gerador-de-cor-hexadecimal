@@ -4,144 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            justify-content: center;
-            align-items: center;
-            font-family: Helvetica;
-            position: relative;
-        }
-
-        header{
-            position: relative;
-            top: 0;
-            width: 100%;
-            display: flex;
-           
-            align-items: center;
-            justify-content: center;
-            height: 72px;
-        }
-
-        h1{
-            font-size: 2.25em;
-            top: 8px;
-            color: #808085;
-            
-        }
-
-        .contain{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 70%;
-            height: 300px;
-            margin: auto;
-            background-color: black;
-            cursor: pointer;      
-        }
-        .contain p{
-            color: white;
-            font-size: 3em;
-        }
-
-        #copy{
-            position: absolute;
-            font-size: 3em;
-            opacity: 0;
-            color: white;
-            
-        }
-
-        #message{
-            position: relative;
-            color: #A7A7AD;
-            font-size: 1.5em;
-
-        }
-
-        @media (max-width: 564px) {
-            body{
-                font-size: 12px;
-            }
-        }
-
-    </style>
 </head>
 <body>
     <header>
         <h1 class="title">Gerador de cor</h1>
-
     </header>
     <div class="contain">
         <p>#000000</p>
         <h2 id="copy">Copiado</h2>
     </div>
     <p id="message">Tecla espaço altera cor</p>
-    
-    <script>
-        const contain = document.querySelector('.contain')
-        const copiado = document.getElementById('copy')
-        const codigoHex = document.querySelector('.contain p')
-
-        contain.addEventListener('click', () => {
-            //Abaixa a opacidade do retãngulo que contém a cor, aplica transição e tirca a opacidade do código
-            contain.style.opacity = .8
-            contain.style.transition = "ease 0.1s"
-            codigoHex.style.opacity = 0           
-            copiado.style.opacity = .8
-            setTimeout(function(){
-                //Depois de 600ms a opacidade da cor volta ao normal, o código volta a aparecer e o "copiado" desaparce
-                contain.style.opacity = 1
-                contain.style.transition = "ease 0.75s"
-                codigoHex.style.opacity = 1
-                copiado.style.opacity = 0
-
-            }, 600); 
-            //copiar o coteúdo do parágrafo para a área de transferência do usuário
-            navigator.clipboard.writeText(codigoHex.textContent)
-        })
-
-
-        // Mudar cor quando a tecla ESPAÇO for teclada
-        window.addEventListener('keydown', () => {
-            if(event.keyCode == 32){           
-                // Colocando o código retornado da função numa variável
-                let corHex = numeroHex()
-                // Trocado a cor e o texto da div para o valor do código
-                contain.style.background = `#${corHex}`
-                codigoHex.innerHTML = `#${corHex}`
-            }
-        })
-
-        function numeroHex (){
-            // Gera um número aleatório com decimal no formato hexadecimal. Ex: 0.23f39dfd
-            let numberRandom = (Math.random() * 1).toString(16)
-            //separo a parte inteira e a parte decimal
-            let separado = numberRandom.split('.')
-            // Desestruturo e color a parte decimal na variável numHex
-            let [, numHex] = separado
-            let numHex6
-
-            if(numHex.length == 11){
-                numHex6 = numHex.substr(5)
-            } else if( numHex.length == 12){
-                numHex6 = numHex.substr(6)
-            }
-            else if( numHex.length == 13){
-                numHex6 = numHex.substr(7)
-            }
-            
-            return numHex6
-            
-        }
-        
-    </script>
+    <script src="./script.js"></script>
 </body>
 </html>
+
